@@ -1,13 +1,20 @@
-web:
+nginx:
   image: nginx:latest
   ports:
     - "8080:80"
   volumes:
-    - ./app:/app
-    - ./site.conf:/etc/nginx/conf.d/site.conf
+    - ./code:/code
+    - ./contaners/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    - ./logs:/var/log/nginx
   links:
     - php
 php:
-    image: php:7-fpm
-    volumes:
-      - ./app:/app
+  image: php:7-fpm
+  volumes:
+    - ./code:/code
+db:
+  image: mysql
+  volumes:
+    - ./database:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: example
