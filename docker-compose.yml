@@ -12,9 +12,10 @@ php:
   image: php:7-fpm
   volumes:
     - ./code:/code
+    - ./contaners/php/conf/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
 db:
-  image: mysql
+  image: mysql:8
   volumes:
-    - ./database:/var/lib/mysql
+    - ./.database:/var/lib/mysql
   environment:
     MYSQL_ROOT_PASSWORD: example
