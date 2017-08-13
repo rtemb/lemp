@@ -4,7 +4,7 @@ nginx:
     - "8080:80"
   volumes:
     - ./code:/code
-    - ./contaners/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    - ./containers/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
     - ./logs:/var/log/nginx
   links:
     - php
@@ -12,7 +12,7 @@ php:
   image: php:7-fpm
   volumes:
     - ./code:/code
-    - ./contaners/php/conf/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+    - ./containers/php/conf/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
 db:
   image: mysql:8
   volumes:
