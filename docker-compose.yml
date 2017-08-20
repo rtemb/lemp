@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   nginx:
     image: nginx:1.13.1
@@ -8,12 +8,14 @@ services:
       - ./code:/code
       - ./containers/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
       - ./logs:/var/log/nginx
+    container_name: nginx
 
   php:
-    image: php:7-fpm
+    build: containers/php
     volumes:
       - ./code:/code
       - ./containers/php/conf/log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
+    container_name: php
 
   db:
     image: mysql:8
@@ -23,3 +25,4 @@ services:
       - ./.database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: example
+    container_name: dbMysql
